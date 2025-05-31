@@ -3,17 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <title>Kyoutaka.html</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="https://files.catbox.moe/2ucirg.jpg"  type="image/x-icon" />
 </head>
 <body>
   <!-- Loading Screen -->
   <div id="loading-screen">
     <h1 class="dimension-text">MENUJU DIMENSI BARU</h1>
-    <h2 class="rzox" id="rzox"></h2>
+    <h2 id="rzox"></h2>
     <p class="countdown-text">Masuk dalam: <span id="countdown">17</span> detik</p>
-    <div class="progress-bar-container">
+    <div class="progress-container">
       <div class="progress-bar" id="progress-bar"></div>
     </div>
     <div class="chaos-symbol">🔥</div>
@@ -21,7 +20,7 @@
 
   <!-- Main Website Content -->
   <div id="app" class="hidden">
-    <!-- Navigation Bar -->
+    <!-- Navbar -->
     <nav class="navbar">
       <h1>Kyoutaka / Januar</h1>
       <button onclick="toggleMenu()" class="menu-toggle">&spades;</button>
@@ -43,22 +42,21 @@
 
     <!-- Backsound Toggle -->
     <button id="music-button" onclick="toggleMusic()">😁</button>
+    <audio id="music" src="https://files.catbox.moe/yrufso.mp3"  loop></audio>
 
-    <!-- Main Sections -->
+    <!-- Sections -->
     <main>
-      <!-- Home -->
       <section id="home" class="active">
         <h1 class="animate-pulse">Kyoutaka.html</h1>
         <p>Selamat datang di dunia cyberpunk dan imajinasi tak terbatas</p>
         <div class="glow-text animate-pulse">✨ Anda telah memasuki wilayah Kegelapan Abadi ✨</div>
       </section>
 
-      <!-- Profile -->
       <section id="profile">
         <img src="https://files.catbox.moe/2ucirg.jpg"  alt="Profile Picture" class="profile-pic" />
         <h2>Kyoutaka / Januar Pratama</h2>
         <p class="subtitle">Penulis Cyberpunk & Penghisap Jiwa</p>
-        <p>Halo semua! Aku Kyoutaka, atau lebih dikenal sebagai Januar. Aku adalah Dewa Kontrak Jiwa.</p>
+        <p>Halo semua! Aku Kyoutaka, atau lebih dikenal sebagai Januar.</p>
         <p>Moto hidup: “Bekerja seenak jidat” (Hataraku kurai jigataku - 働くくらい地獄)</p>
         <p><strong>Umur:</strong> 15 tahun</p>
         <p><strong>Lahir:</strong> 5 Januari 2025</p>
@@ -67,7 +65,6 @@
         <p><strong>Marga:</strong> January, Karsin, Koto, Chaniago</p>
       </section>
 
-      <!-- About Me -->
       <section id="about-me">
         <h2>Tentang Diri Saya</h2>
         <p>
@@ -76,21 +73,15 @@
           Aku menawarkan waktu hidupmu dengan imbalan apapun yang kau inginkan.
           Apakah kamu siap membayar harga jiwa?
         </p>
-        <p>
-          Aku tidak percaya pada kerja keras, aku percaya pada efisiensi dan kesenangan sesaat.
-        </p>
-        <p>
-          Yoroshiku onegaishimasu... jika kau berani masuk ke duniamu sendiri.
-        </p>
+        <p>Aku tidak percaya pada kerja keras, aku percaya pada efisiensi dan kesenangan sesaat.</p>
+        <p>Yoroshiku onegaishimasu... jika kau berani masuk ke duniamu sendiri.</p>
       </section>
 
-      <!-- Countdown -->
       <section id="kebangkitan">
         <h2>Menuju Kebangkitan Sang Kegelapan</h2>
         <div id="countdown-display" class="countdown-box">0d 0h 0m 0s</div>
       </section>
 
-      <!-- Skills -->
       <section id="kemampuan">
         <h2>Kemampuan</h2>
         <div class="skill">
@@ -119,7 +110,6 @@
         </div>
       </section>
 
-      <!-- Relationships -->
       <section id="hubungan">
         <h2>Hubungan Sang Iblis</h2>
         <p><strong>Teman:</strong> Raifa, Wildan, Member Martabak Team</p>
@@ -134,7 +124,6 @@
         <p><strong>Sisa Nyawa:</strong> Tidak diketahui</p>
       </section>
 
-      <!-- Kontak -->
       <section id="kontak">
         <h2>Kontak Saya</h2>
         <ul>
@@ -143,7 +132,6 @@
         </ul>
       </section>
 
-      <!-- Anna AI -->
       <section id="anna-ai">
         <h2>Chat dengan Anna AI</h2>
         <input type="text" id="ai-input" placeholder="Tulis pesan..." />
@@ -151,7 +139,6 @@
         <div id="chat-log"></div>
       </section>
 
-      <!-- Komentar -->
       <section id="komentar">
         <h2>Komentar Pengunjung</h2>
         <input type="text" id="comment-input" placeholder="Tinggalkan komentar..." />
@@ -159,24 +146,18 @@
         <div id="comment-list"></div>
       </section>
 
-      <!-- WhatsApp Channel -->
       <section id="whatsapp">
         <h2>Join ke Saluran WhatsApp</h2>
         <a href="https://whatsapp.com/channel/0029VbALx58E50UfOE5c0C2b"  target="_blank" class="join-button">Join ke Saluran</a>
       </section>
     </main>
 
-    <!-- Footer -->
     <footer>
       <p>&copy; 2025 Andhika Januar Pratama | Powered by Darah ❤️</p>
       <p>Status: <span id="online-indicator" class="status-online"></span> Online</p>
     </footer>
   </div>
 
-  <!-- Backsound -->
-  <audio id="music" src="https://files.catbox.moe/yrufso.mp3"  loop></audio>
-
-  <!-- Script -->
   <script src="script.js"></script>
 </body>
 </html>
