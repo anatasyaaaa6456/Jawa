@@ -1,20 +1,22 @@
-let activeMenu = "home";
+let activeSection = "home";
 let chatLog = [];
 let comments = [];
 
 // Typing Animation for R.Zox
+const rzoxEl = document.getElementById("rzox");
+const rzoxText = "R.Zox";
+let rzoxIndex = 0;
+
+function startTyping() {
+  if (rzoxIndex < rzoxText.length) {
+    rzoxEl.innerHTML += rzoxText[rzoxIndex];
+    rzoxIndex++;
+    setTimeout(startTyping, 100);
+  }
+}
+
 window.onload = () => {
-  const rzox = "R.Zox";
-  let i = 0;
-  const rzoxEl = document.getElementById("rzox");
-  const typingInterval = setInterval(() => {
-    if (i < rzox.length) {
-      rzoxEl.innerHTML += rzox[i];
-      i++;
-    } else {
-      clearInterval(typingInterval);
-    }
-  }, 100);
+  startTyping();
 
   // Countdown in Loading Screen
   let countdown = 17;
@@ -27,30 +29,28 @@ window.onload = () => {
       countdownEl.textContent = countdown;
       progressBar.style.width = ((17 - countdown) / 17 * 100) + "%";
     } else {
+      clearInterval(interval);
       document.getElementById("loading-screen").classList.add("hidden");
       document.getElementById("app").classList.remove("hidden");
-      clearInterval(interval);
     }
   }, 1000);
 
-  // Countdown to January 5, 2026
-  const countdownDisplay = document.getElementById("countdown-display");
+  // Countdown to 5 Januari 2026
   const targetDate = new Date("January 5, 2026 00:00:00").getTime();
+  const countdownDisplay = document.getElementById("countdown-display");
 
   function updateCountdown() {
     const now = new Date().getTime();
     const distance = targetDate - now;
-
     if (distance < 0) {
-      countdownDisplay.innerHTML = "Waktumu habis.";
+      countdownDisplay.innerText = "Waktumu Habis.";
       return;
     }
-
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % 1000 * 60) / 1000);
-    countdownDisplay.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    const seconds = Math.floor((distance % 1000) / 1000);
+    countdownDisplay.innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
   }
 
 setInterval(updateCountdown, 1000);
@@ -62,17 +62,14 @@ function toggleMusic() {
   const audio = document.getElementById("music");
   isPlaying = !isPlaying;
   if (isPlaying) {
-    audio.play().catch(() => {});
+    audio.play().catch(e => console.log("Autoplay blocked"));
   } else {
     audio.pause();
   }
 }
 
-// Status Online Blink
-const onlineIndicator = document.getElementById("online-indicator");
-setInterval(() => {
-  onlineIndicator.style.background = onlineIndicator.style.background === "red" ? "gray" : "red";
-}, 5000);
+// Welcome Prompt
+const userName = prompt("Siapa nama kamu?") || "Pengunjung";
 
 // Toggle Menu
 function toggleMenu() {
@@ -87,18 +84,17 @@ function setActive(id) {
   document.getElementById("menu-dropdown").classList.add("hidden");
 }
 
-// Anna AI Chat
+// Anna AI Chatbot
 function sendMessage() {
   const input = document.getElementById("ai-input");
-  const log = document.getElementById("chat-log");
   const message = input.value.trim();
   if (!message) return;
 
   const userMsg = `<div class="user-message">${message}</div>`;
   const aiReply = getAIResponse(message);
-  log.innerHTML += userMsg + aiReply;
+  document.getElementById("chat-log").innerHTML += userMsg + aiReply;
   input.value = "";
-  log.scrollTop = log.scrollHeight;
+  document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
 }
 
 function getAIResponse(message) {
@@ -106,7 +102,7 @@ function getAIResponse(message) {
   let reply = "";
 
   if (message.includes("hai") || message.includes("halo")) {
-    reply = `<div class="ai-message">Halo! Ada yang bisa saya bantu?</div>`;
+    reply = `<div class="ai-message">Halo, saya Anna AI. Ada yang bisa saya bantu?</div>`;
   } else if (message.includes("karya")) {
     reply = `<div class="ai-message">Saat ini tersedia satu cerita utama berjudul 'ANTAKA' dalam format PDF.</div>`;
   } else if (message.includes("profil")) {
@@ -114,8 +110,8 @@ function getAIResponse(message) {
   } else if (message.includes("kontak")) {
     reply = `<div class="ai-message">WhatsApp: +62 889-8096-3797 | Email: januar@kyoutaka.dev</div>`;
   } else if (message.includes("rundown")) {
-    const days = document.getElementById("countdown-display").textContent.split(" ")[0];
-    reply = `<div class="ai-message">Masih tersisa ${days} hari menuju kebangkitan Sang Kegelapan.</div>`;
+    const time = document.getElementById("countdown-display").innerText.split(" ")[0];
+    reply = `<div class="ai-message">Masih tersisa ${time} hari menuju kebangkitan Sang Kegelapan.</div>`;
   } else if (message.includes("kemampuan")) {
     reply = `<div class="ai-message">Kemampuan: Virtual Creator 70%, Joki Tugas 85%, Guru 90%, Pekerja Kantor 75%</div>`;
   } else {
@@ -128,15 +124,17 @@ function getAIResponse(message) {
 // Add Comment
 function addComment() {
   const input = document.getElementById("comment-input");
-  const list = document.getElementById("comment-list");
+  const commentList = document.getElementById("comment-list");
   const comment = input.value.trim();
   if (!comment) return;
+
   const time = new Date().toLocaleTimeString();
-  list.innerHTML += `<div><strong>${prompt("Siapa nama kamu?") || "Pengunjung"}:</strong> ${comment} <small>${time}</small></div>`;
+  commentList.innerHTML += `<div><strong>${userName}:</strong> ${comment} <small>${time}</small></div>`;
   input.value = "";
 }
 
-// Welcome Prompt
-window.addEventListener("load", () => {
-  prompt("Siapa nama kamu?");
-});
+// Status Online Blink
+const onlineIndicator = document.getElementById("online-indicator");
+setInterval(() => {
+  onlineIndicator.style.background = onlineIndicator.style.background === "red" ? "gray" : "red";
+}, 5000);
